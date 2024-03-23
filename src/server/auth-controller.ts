@@ -1,6 +1,6 @@
 import { CreateUserInput, LoginUserInput } from "@/lib/user-schema";
 
-import bcrypt from 'bcryptjs'
+const bcrypt = require('bcrypt');
 import { prisma } from '@/lib/primsa'
 import { TRPCError } from "@trpc/server";
 import jwt from 'jsonwebtoken'
@@ -18,7 +18,7 @@ export const registerHandler = async ({
             data: {
                 email: input.email,
                 name: input.name,
-                password: input.password
+                password: hashedPassword
             }
         })
 
