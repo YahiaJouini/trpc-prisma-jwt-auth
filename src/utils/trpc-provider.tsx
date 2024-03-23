@@ -19,19 +19,20 @@ const TrpcProvider = ({ children }: PropsWithChildren) => {
                     enabled: () => true
                 }),
                 httpBatchLink({
-                    url,
+                    url: url,
                     fetch: async (input, init?) => {
+                        console.log(input.toString())
                         const fetch = getFetch();
                         return fetch(input, {
                             ...init,
                             credentials: 'include'
-                        })
+                        });
                     }
                 })
             ],
             transformer: superjson
         })
-    )
+    );
     return (
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
             <QueryClientProvider client={queryClient}>
